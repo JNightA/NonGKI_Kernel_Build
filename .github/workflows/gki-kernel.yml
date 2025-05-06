@@ -263,6 +263,11 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
           echo "当前目录$(pwd)"
+          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/
+          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/
+          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/
+          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/
+          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/
           cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/* ./include/linux/
           cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/lib/* ./lib/
           cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/crypto/* ./crypto/
