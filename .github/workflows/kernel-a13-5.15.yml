@@ -14,7 +14,7 @@ on:
       kernelsu_variant:
         required: true
         type: string
-        default: Sukisu
+        default: SukiSU
       kernelsu_branch:
         required: true
         type: string
