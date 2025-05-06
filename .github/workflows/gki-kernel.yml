@@ -168,13 +168,13 @@ jobs:
           $REPO init --depth=1 --u https://github.com/hfdem/android_gki_kernel_5.15_common -b ${FORMATTED_BRANCH} --repo-rev=v2.16
 
           REMOTE_BRANCH=$(git ls-remote https://github.com/hfdem/android_gki_kernel_5.15_common ${FORMATTED_BRANCH})
-          DEFAULT_MANIFEST_PATH=.repo/manifests/default.xml
+          # DEFAULT_MANIFEST_PATH=.repo/manifests/default.xml
 
-          # Check if branch is deprecated
-          if grep -q deprecated <<< $REMOTE_BRANCH; then
-            echo "Found deprecated branch: $FORMATTED_BRANCH"
-            sed -i "s/\"${FORMATTED_BRANCH}\"/\"deprecated\/${FORMATTED_BRANCH}\"/g" $DEFAULT_MANIFEST_PATH
-          fi
+          # # Check if branch is deprecated
+          # if grep -q deprecated <<< $REMOTE_BRANCH; then
+            # echo "Found deprecated branch: $FORMATTED_BRANCH"
+            # sed -i "s/\"${FORMATTED_BRANCH}\"/\"deprecated\/${FORMATTED_BRANCH}\"/g" $DEFAULT_MANIFEST_PATH
+          # fi
 
           # Sync repo and apply patches
           $REPO --version
