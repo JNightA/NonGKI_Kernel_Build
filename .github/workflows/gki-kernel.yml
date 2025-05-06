@@ -263,9 +263,9 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
           echo "当前目录$(pwd)"
-          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/* ./include/linux/
-          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/lib/* ./lib/
-          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/crypto/* ./crypto/
+          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/* ./include/linux/
+          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/lib/* ./lib/
+          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/crypto/* ./crypto/
           echo "当前目录$(pwd)"
           cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
           echo "正在打lz4kd补丁"
