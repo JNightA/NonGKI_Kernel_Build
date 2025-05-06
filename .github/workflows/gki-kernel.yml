@@ -266,11 +266,19 @@ jobs:
           cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k/include/linux/* ./include/linux/
           cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k/lib/* ./lib/
           cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k/crypto/* ./crypto/
-          echo "当前目录$(pwd)"
-          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/zstdn ./lib/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k_oplus ./lib/
+            
+          
+          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/zram_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
           echo "正在打lz4kd补丁"
           patch -p1 -F 3 < lz4kd.patch || true
           echo '完成LZ4KD补丁'
+
+          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/zram_patch/${{ inputs.kernel_version }}/zstdn.patch ./
+          echo "正在打zstdn补丁"
+          patch -p1 -F 3 < zstdn.patch || true
+          echo '完成ZSTDN补丁'
 
       - name: LZ4KD配置
         run: |
