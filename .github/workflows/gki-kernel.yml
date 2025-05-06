@@ -145,7 +145,7 @@ jobs:
           echo "当前目录$(pwd)"
           cd SukiSU_patch
           echo "当前目录$(pwd)"
-          cp -r AnyKernel3 ../
+          cp -r AnyKernel3 ${GITHUB_WORKSPACE}/
           cd ..
           echo "当前目录$(pwd)"
 
@@ -215,9 +215,9 @@ jobs:
           echo "Applying SUSFS patches..."
           
           # Copy SUSFS patches
-          cp ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch ./
-          cp ../susfs4ksu/kernel_patches/fs/* ./fs/
-          cp ../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
+          cp ${GITHUB_WORKSPACE}/susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ inputs.android_version }}-${{ inputs.kernel_version }}.patch ./
+          cp ${GITHUB_WORKSPACE}/susfs4ksu/kernel_patches/fs/* ./fs/
+          cp ${GITHUB_WORKSPACE}/susfs4ksu/kernel_patches/include/linux/* ./include/linux/
           
           #lz4k
           #cp -r ../SukiSU_patch/other/lz4k/include/linux/* ./common/include/linux
@@ -246,7 +246,7 @@ jobs:
 
           if [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
             echo "Applying hooks for SukiSU..."
-            cp ../SukiSU_patch/hooks/syscall_hooks.patch ./
+            cp ${GITHUB_WORKSPACE}/SukiSU_patch/hooks/syscall_hooks.patch ./
             patch -p1 -F 3 < syscall_hooks.patch
           fi
           
@@ -263,11 +263,11 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
           echo "当前目录$(pwd)"
-          cp -r ../SukiSU_patch/other/lz4k/include/linux/* ./include/linux/
-          cp -r ../SukiSU_patch/other/lz4k/lib/* ./lib/
-          cp -r ../SukiSU_patch/other/lz4k/crypto/* ./crypto/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/* ./include/linux/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/lib/* ./lib/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/crypto/* ./crypto/
           echo "当前目录$(pwd)"
-          cp ../SukiSU_patch/other/lz4k_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
+          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
           echo "正在打lz4kd补丁"
           patch -p1 -F 3 < lz4kd.patch || true
           echo '完成LZ4KD补丁'
@@ -434,7 +434,7 @@ jobs:
             ./patch
             rm -rf Image
             mv oImage Image
-            cd ../../..
+            cd ../../../..
           fi
 
       - name: Patch Image File A14 & A15
@@ -448,7 +448,7 @@ jobs:
             ./patch
             rm -rf Image
             mv oImage Image
-            cd ../..
+            cd ../../..
           fi
             
       - name: Create Bootimgs Folder and Copy Images
