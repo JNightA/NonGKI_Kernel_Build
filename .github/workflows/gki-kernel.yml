@@ -142,9 +142,12 @@ jobs:
           # Clone repositories using the branch names
           git clone https://github.com/ShirkNeko/susfs4ksu.git -b "$SUSFS_BRANCH"
           git clone https://github.com/ShirkNeko/SukiSU_patch.git
+          echo "当前目录$(pwd)"
           cd SukiSU_patch
+          echo "当前目录$(pwd)"
           cp -r AnyKernel3 ../
           cd ..
+          echo "当前目录$(pwd)"
 
       - name: Set CONFIG Environment Variable
         run: |
@@ -243,7 +246,7 @@ jobs:
 
           if [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
             echo "Applying hooks for SukiSU..."
-            cp ../../SukiSU_patch/hooks/syscall_hooks.patch ./
+            cp ../SukiSU_patch/hooks/syscall_hooks.patch ./
             patch -p1 -F 3 < syscall_hooks.patch
           fi
           
