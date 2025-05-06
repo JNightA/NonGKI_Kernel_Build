@@ -220,9 +220,9 @@ jobs:
           cp ${GITHUB_WORKSPACE}/susfs4ksu/kernel_patches/include/linux/* ./include/linux/
           
           #lz4k
-          #cp -r ../SukiSU_patch/other/lz4k/include/linux/* ./common/include/linux
-          #cp -r ../SukiSU_patch/other/lz4k/lib/* ./common/lib
-          #cp -r ../SukiSU_patch/other/lz4k/crypto/* ./common/crypto
+          #cp -r ../SukiSU_patch/other/zram/lz4k/include/linux/* ./common/include/linux
+          #cp -r ../SukiSU_patch/other/zram/lz4k/lib/* ./common/lib
+          #cp -r ../SukiSU_patch/other/zram/lz4k/crypto/* ./common/crypto
 
           if [ "${{ inputs.kernelsu_variant }}" == "SukiSU" ]; then
             echo "Applying SUSFS patches for SukiSU..."
@@ -263,16 +263,11 @@ jobs:
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
           echo "当前目录$(pwd)"
-          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/
-          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/
-          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/
-          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/
-          ls -la ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/
-          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/include/linux/* ./include/linux/
-          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/lib/* ./lib/
-          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k/crypto/* ./crypto/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k/include/linux/* ./include/linux/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k/lib/* ./lib/
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/zram/lz4k/crypto/* ./crypto/
           echo "当前目录$(pwd)"
-          cp ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
+          cp -r ${GITHUB_WORKSPACE}/SukiSU_patch/other/lz4k_patch/${{ inputs.kernel_version }}/lz4kd.patch ./
           echo "正在打lz4kd补丁"
           patch -p1 -F 3 < lz4kd.patch || true
           echo '完成LZ4KD补丁'
