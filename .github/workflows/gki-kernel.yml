@@ -162,23 +162,14 @@ jobs:
           mkdir -p "$CONFIG"
           cd "$CONFIG"
 
-          # Initialize and sync kernel source
-          echo "Initializing and syncing kernel source..."
-          FORMATTED_BRANCH="android13-5.15-2025-03"
-          $REPO init --depth=1 --u https://github.com/hfdem/android_gki_kernel_5.15_common -b ${FORMATTED_BRANCH} --repo-rev=v2.16
+          # 直接使用 Git 克隆代码
+          echo "Cloning kernel source..."
+          git clone --depth=1 -b android13-5.15-2025-03 \
+            https://github.com/hfdem/android_gki_kernel_5.15_common \
+            src
 
-          REMOTE_BRANCH=$(git ls-remote https://github.com/hfdem/android_gki_kernel_5.15_common ${FORMATTED_BRANCH})
-          # DEFAULT_MANIFEST_PATH=.repo/manifests/default.xml
-
-          # # Check if branch is deprecated
-          # if grep -q deprecated <<< $REMOTE_BRANCH; then
-            # echo "Found deprecated branch: $FORMATTED_BRANCH"
-            # sed -i "s/\"${FORMATTED_BRANCH}\"/\"deprecated\/${FORMATTED_BRANCH}\"/g" $DEFAULT_MANIFEST_PATH
-          # fi
-
-          # Sync repo and apply patches
-          $REPO --version
-          $REPO --trace sync -c -j$(nproc --all) --no-tags --fail-fast
+          # 进入源码目录（根据实际路径调整）
+          cd src
 
       #- name: Copy file
       #  run: |
